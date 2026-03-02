@@ -46,7 +46,7 @@ class Project(models.Model):
 
 class SocialLink(models.Model):
     name = models.CharField(max_length=50)
-    url = models.URLField()
+    url = models.CharField(max_length=200)
     icon_class = models.CharField(max_length=100, help_text="Font Awesome class e.g. fab fa-github")
     order = models.IntegerField(default=0)
 
