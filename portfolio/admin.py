@@ -3,19 +3,12 @@ from django import forms
 from .models import Skill, Project, SocialLink
 
 
-class SocialLinkForm(forms.ModelForm):
-    url = forms.CharField(max_length=200)  # plain CharField, no URL validation
-    
+class SocialLinkAdminForm(forms.ModelForm):
+    url = forms.CharField(max_length=200, help_text="e.g. https://github.com/user or mailto:you@email.com")
+
     class Meta:
         model = SocialLink
         fields = '__all__'
-
-
-@admin.register(SocialLink)
-class SocialLinkAdmin(admin.ModelAdmin):
-    form = SocialLinkForm
-    list_display = ['name', 'url', 'order']
-    list_editable = ['order']
 
 
 @admin.register(Skill)
@@ -32,3 +25,10 @@ class ProjectAdmin(admin.ModelAdmin):
     list_editable = ['featured', 'order']
     list_filter = ['featured']
     search_fields = ['title', 'description']
+
+
+@admin.register(SocialLink)
+class SocialLinkAdmin(admin.ModelAdmin):
+    form = SocialLinkAdminForm
+    list_display = ['name', 'url', 'order']
+    list_editable = ['order']
